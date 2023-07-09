@@ -25,7 +25,7 @@ test_data = datasets.MNIST(root='data', train=False, download=True, transform= t
 training_loader = DataLoader(training_data, batch_size=32, shuffle=True)
 test_loader = DataLoader(test_data, batch_size=32, shuffle=False)
 
-def printSizeOfFirstElement(loader, set_type):
+def print_size_of_first_element(loader, set_type):
     #create iterator
     input_iter = iter(loader)
 
@@ -45,13 +45,13 @@ def print_first_few_images(dataset):
     plt.title(f'Label: {label}')
 
 
-printSizeOfFirstElement(training_loader,'training')
-printSizeOfFirstElement(test_loader, 'test')
+print_size_of_first_element(training_loader,'training')
+print_size_of_first_element(test_loader, 'test')
 print_first_few_images(training_data)
 class MyNet(nn.Module):
     def __init__(self):
         super().__init__()
-        self.activation2 = F.softmax
+        self.activation = F.softmax
         self.layer1 = nn.Linear(in_features=784,out_features=500)
         self.layer2 = nn.Linear(in_features=500, out_features= 100)
         self.layer3 = nn.Linear(in_features=100,out_features=50)
@@ -59,9 +59,9 @@ class MyNet(nn.Module):
 
     def forward(self, inputs):
         new_inputs = torch.flatten(inputs, 1)
-        inputs = self.activation2(self.layer1(new_inputs))
-        inputs = self.activation2(self.layer2(inputs))
-        inputs = self.activation2(self.layer3(inputs))
+        inputs = self.activation(self.layer1(new_inputs))
+        inputs = self.activation(self.layer2(inputs))
+        inputs = self.activation(self.layer3(inputs))
         inputs = self.layer4(inputs)
         return inputs
 
@@ -127,8 +127,8 @@ for inputs, labels in test_loader:
 
     val_correct += (preds == labels).sum().item()
     val_loss += loss.item()
-print(
-    f'Epoch is {epoch + 1}  with validation accuracy: {val_correct / len(test_loader):.2f}% validation loss: {val_loss / len(test_loader):.5f}')
+
+print( f'Epoch is {epoch + 1}  with validation accuracy: {val_correct / len(test_loader):.2f}% validation loss: {val_loss / len(test_loader):.5f}')
 val_loss_history.append(val_loss / len(test_loader))
 
 torch.save()
