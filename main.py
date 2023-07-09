@@ -71,7 +71,7 @@ net = MyNet()
 net.to(device)
 
 # Choose an optimizer
-optimizer = optim.Adam(net.parameters(), lr=0.001)
+optimizer = optim.SGD(net.parameters(), lr=0.001)
 
 # Choose a loss function
 criterion = nn.CrossEntropyLoss()
