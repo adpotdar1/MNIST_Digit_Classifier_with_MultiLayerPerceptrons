@@ -7,7 +7,7 @@ from torch.utils.data import DataLoader
 import torch.nn.functional as F
 import matplotlib.pyplot as plt
 
-
+# This is a very basic Neural Network using multilayer perceptrons to predict images in CIFAR 10 dataset
 transform = transforms.Compose(
     [
         transforms.ToTensor(),
@@ -130,11 +130,6 @@ for inputs, labels in test_loader:
 
 print( f'Epoch is {epoch + 1}  with validation accuracy: {val_correct / len(test_loader):.2f}% validation loss: {val_loss / len(test_loader):.5f}')
 val_loss_history.append(val_loss / len(test_loader))
-
-torch.save()
-
-
-
 
 
 
